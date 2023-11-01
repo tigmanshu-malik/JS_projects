@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="rock-paper-scissor.css">
+    <title>Rock Paper Scissor</title>
+</head>
+<body>
+    <p style="font-weight: bold; text-align: center; font-size: 20px;">Rock Paper Scissors</p>
+    <div style="padding-top: 20px; text-align: center;">
+      <button onclick="
+      playGame('rock');
+    " class="hand"><div class="ima"><i class="fa-solid fa-hand-back-fist"></i></div></button>
+
+    <button onclick="
+      playGame('paper');
+    " class = "hand"><div class="ima"><i class="fa-solid fa-hand "></i></div></button>
+
+    <button onclick="
+      playGame('scissors');
+    " class ="hand"><div class="ima"><i class="fa-solid fa-hand-scissors"></i></div></button>
+
+    <p class="firstResult"></p>
+
+    <p class="secondResult"></p>
+
+    <p class="score-board">Wins: 0, Loses: 0, Ties: 0</p>
+
+    <button onclick="results.wins = 0; results.loses = 0; results.ties = 0; localStorage.removeItem('score');updateMove();"class = "reset">Reset</button>
+
+    <button class="auto-play" onclick="autoplay()">Auto Play</button>
+    </div>
+    
+  
+    
+
+    <script>
+        
+        const results = JSON.parse(localStorage.getItem('score')) || {
+            wins: 0,
+            loses: 0,
+            ties: 0
+        }
+        
+        updateMove();
+
+      document.body.addEventListener('keydown', (event) => {
+        if(event.key === 'r'){
+          playGame('rock');
+        }
+
+        else if(event.key === 'p'){
+          playGame('paper');
+        }
+
+        else if(event.key === 's'){
+          playGame('scissors');
+        }
+      })  
+
+      function playGame(playerMove) {
+        const computerMove = pickComputerMove();
+
+        
+        let result = '';
+
+        if (playerMove === 'scissors') {
+          if (computerMove === 'rock') {
+            result = 'You lose.';
+          } else if (computerMove === 'paper') {
+            result = 'You win.';
+          } else if (computerMove === 'scissors') {
+            result = 'Tie.';
+          }
+
+        } else if (playerMove === 'paper') {
+          if (computerMove === 'rock') {
+            result = 'You win.';
+          } else if (computerMove === 'paper') {
+            result = 'Tie.';
+          } else if (computerMove === 'scissors') {
+            result = 'You lose.';
+          }
+          
+        } else if (playerMove === 'rock') {
+          if (computerMove === 'rock') {
+            result = 'Tie.';
+          } else if (computerMove === 'paper') {
+            result = 'You lose.';
+          } else if (computerMove === 'scissors') {
+            result = 'You win.';
+          }
+        }
+
+        secondResult(playerMove, computerMove);
+
+        if(result == 'You win.'){
+            results.wins++;
+            firstResult('You win.')
+
+        }
+
+        else if(result == 'You lose.'){
+            results.loses ++;
+            firstResult('You lose.')
+        }
+
+        else if(result == 'Tie.'){
+            results.ties++;
+            firstResult('Tie')
+        }
+
+        localStorage.setItem('score', JSON.stringify(results));
+
+        updateMove();
+
+        
+      }
+
+      
+
+      function pickComputerMove() {
+        const randomNumber = Math.random();
+
+        let computerMove = '';
+
+        if (randomNumber >= 0 && randomNumber < 1 / 3) {
+          computerMove = 'rock';
+        } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+          computerMove = 'paper';
+        } else if (randomNumber >= 2 / 3 && randomNumber < 1) {
+          computerMove = 'scissors';
+        }
+
+        return computerMove;
+      }
+
+      function pickPlayerMove() {
+        const randomNumber = Math.random();
+
+        let computerMove = '';
+
+        if (randomNumber >= 0 && randomNumber < 1 / 3) {
+          computerMove = 'rock';
+        } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+          computerMove = 'paper';
+        } else if (randomNumber >= 2 / 3 && randomNumber < 1) {
+          computerMove = 'scissors';
+        }
+
+        return computerMove;
+      }
+
+      function updateMove(){
+
+        document.querySelector('.score-board').innerHTML = `Wins: ${results.wins}, Loses: ${results.loses}, Ties: ${results.ties}`
+
+      }
+
+      function firstResult(n){
+        document.querySelector('.firstResult').innerHTML = `${n}` 
+
+      }
+
+      function secondResult(a, b){
+        if(a === 'rock'){
+          a = '<i class="fa-solid fa-hand-back-fist"></i>'
+        }
+
+        else if(a === 'paper'){
+          a = '<i class="fa-solid fa-hand"></i>'
+        }
+
+        else if(a ==='scissors'){
+          a = '<i class="fa-solid fa-hand-scissors"></i>'
+        }
+
+        if(b === 'rock'){
+          b = '<i class="fa-solid fa-hand-back-fist"></i>'
+        }
+
+        else if(b === 'paper'){
+          b = '<i class="fa-solid fa-hand"></i>'
+        }
+
+        else if(b ==='scissors'){
+          b = '<i class="fa-solid fa-hand-scissors"></i>'
+        }
+        document.querySelector('.secondResult').innerHTML = `Your move: ${a}, computer's move: ${b}` 
+      }
+
+      let isAutoPlay = false;
+      let intervalId;
+
+      function autoplay(){
+
+        if(!isAutoPlay){
+
+          intervalId = setInterval(function() {
+          const playerMove = pickPlayerMove();
+        playGame(playerMove);
+        }, 1000);
+
+        document.querySelector('.auto-play').innerHTML = 'Stop playing';
+
+        isAutoPlay = true;
+        }
+        
+        else{
+          clearInterval(intervalId);
+          isAutoPlay = false;
+          document.querySelector('.auto-play').innerHTML = 'Auto Play'
+        }
+
+        
+
+
+
+        
+
+      }
+
+      
+    </script>
+</body>
+</html>

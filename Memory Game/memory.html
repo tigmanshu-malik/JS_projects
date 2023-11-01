@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="memory.css">
+</head>
+<body>
+    <h3 style="text-align: center;">Memory Game</h3>
+
+    <div>
+        <div style="display: flex; justify-content: space-evenly; margin-bottom: 15px;">
+            <div class="card-block one" id="test" onclick="show('one');"></div>
+            <div class="card-block two" onclick="show('two');"></div>
+            <div class="card-block three" onclick="show('three');"></div>
+            <div class="card-block four" onclick="show('four');"></div>
+        </div>
+
+        <div style="display: flex; justify-content: space-evenly; margin-bottom: 15px;">
+            <div class="card-block five" onclick="show('five');"></div>
+            <div class="card-block six" onclick="show('six');"></div>
+            <div class="card-block seven" onclick="show('seven');"></div>
+            <div class="card-block eight" onclick="show('eight');"></div>
+        </div>
+
+        <div style="display: flex; justify-content: space-evenly; margin-bottom: 15px;">
+            <div class="card-block nine" onclick="show('nine');"></div>
+            <div class="card-block ten" onclick="show('ten');"></div>
+            <div class="card-block eleven" onclick="show('eleven');"></div>
+            <div class="card-block twelve" onclick="show('twelve');"></div>
+        </div>
+
+        
+    </div>
+
+    <script>
+
+        function show(index){
+
+            const css_index = '.' + index
+
+            if(document.querySelector(css_index).classList.contains('clicked')){
+
+                document.querySelector(css_index).classList.remove('clicked')
+            }
+
+            else{
+                document.querySelector(css_index).classList.add('clicked')
+            }
+            }
+            
+        
+
+    </script>
+
+</body>
+</html>

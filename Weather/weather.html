@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="weather.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&family=Roboto:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <p class="heading">Weather Forecast</P>
+
+    <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+
+        <div style="display: flex; align-items: center;">
+            <input type="text" placeholder="Enter your city" class="input-box">
+        <button onclick="doTheThing()" class="search-box">
+            <span class="material-symbols-outlined">
+                search
+                </span>
+        </button>
+        </div>
+
+        <div>
+            <p class="data"></p>
+
+        </div>
+
+        
+    </div>
+
+    <script src="weather.js"></script>
+</body>
+</html>

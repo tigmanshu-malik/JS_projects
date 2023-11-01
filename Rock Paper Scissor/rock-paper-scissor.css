@@ -1,0 +1,32 @@
+body{
+    background-color: black;
+    color: white;
+}
+
+.hand{
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    padding-right: 10px;
+    padding-left: 10px;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+
+}
+
+.ima{
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+
+}
+
+.reset, .auto-play{
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
